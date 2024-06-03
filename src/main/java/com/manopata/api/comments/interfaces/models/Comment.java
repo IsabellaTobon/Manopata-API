@@ -1,6 +1,7 @@
 package com.manopata.api.comments.interfaces.models;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,6 +15,7 @@ import lombok.NoArgsConstructor;
 
 public class Comment
 {
+    @Id
     private String id;
     private String bodyText;
     private Integer likes;
