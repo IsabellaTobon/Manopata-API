@@ -20,5 +20,6 @@ public class User {
     private String email;
     private String lastname;
     private String nickname;
-    private String rolId;
+    private String user_password;
+    private String rol_id;
 }

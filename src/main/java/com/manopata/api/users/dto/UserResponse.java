@@ -1,10 +1,6 @@
 package com.manopata.api.users.dto;
 
 import com.manopata.api.users.interfaces.models.User;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 
 
 public class UserResponse
@@ -23,6 +19,6 @@ public class UserResponse
         this.email = model.getEmail();
         this.lastname = model.getLastname();
         this.nickname = model.getNickname();
-        this.rolId = model.getRolId();
+        this.rolId = model.getRol_id();
     }
 }

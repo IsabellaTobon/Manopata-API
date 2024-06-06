@@ -14,16 +14,19 @@ public class UserRequest
     private String email;
     private String lastname;
     private String nickname;
-    private String rolId;
+    private String user_password;
+    private String rol_id;
 
     public User toModel (String id)
     {
         User model = new User();
         model.setId(id);
         model.setName(this.name);
+        model.setEmail(this.email);
         model.setLastname(this.lastname);
         model.setNickname(this.nickname);
-        model.setRolId(this.rolId);
+        model.setUser_password(this.user_password);
+        model.setRol_id(this.rol_id);
 
         return model;
     }

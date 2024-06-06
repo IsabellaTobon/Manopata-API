@@ -27,7 +27,7 @@ public class UserService {
     @SneakyThrows
     public UserResponse create(UserRequest request)
     {
-        if (this.userRepository.findByEmail(request.getEmail()).isPresent())
+        /*if (this.userRepository.findByEmail(request.getEmail()).isPresent())
         {
             throw new UserEmailExistsException();
         }
@@ -36,7 +36,7 @@ public class UserService {
         {
             throw new UserNicknameExistsException();
         }
-
+*/
         String id = UUID.randomUUID().toString();
         User model = this.userRepository.save(request.toModel(id));
         return new UserResponse(model);
