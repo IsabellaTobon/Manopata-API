@@ -59,4 +59,9 @@ public class UserDbo implements UserRepository {
         return this.repository.findByNameAndLastname(name, lastName);
     }
 
+    @Override
+    public List<User> findAll() {
+        return this.repository.findAll();
+    }
+
 }

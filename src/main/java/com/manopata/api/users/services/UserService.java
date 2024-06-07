@@ -11,8 +11,10 @@ import com.manopata.api.users.interfaces.models.User;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -67,6 +69,42 @@ public class UserService {
 
         return new UserResponse(optionalUser.get());
     }
+
+
+    public List<UserResponse> searchUsers(Optional<String> name, Optional<String> nickname, Optional<String> email) {
+        List<User> users = userRepository.findAll();
+
+        if (name.isPresent()) {
+            if (name.get().contains(" ")) {
+                String[] nameParts = name.get().split(" ");
+                if (nameParts.length == 2) {
+                    users = userRepository.findByNameAndLastName(nameParts[0], nameParts[1]);
+                }
+            } else {
+                users = userRepository.findByName(name.get());
+            }
+        } else {
+            // IF NAME IS NOT PRESENT, GET ALL USERS
+            users = userRepository.findAll();
+        }
+
+        // FILTER BY NICKNAME IF PRESENT IN THE PARAMETERS
+        if (nickname.isPresent()) {
+            users = users.stream()
+                    .filter(user -> user.getNickname().equalsIgnoreCase(nickname.get()))
+                    .collect(Collectors.toList());
+        }
+
+        // FILTER BY EMAIL IF PRESENT IN THE PARAMETERS
+        if (email.isPresent()) {
+            users = users.stream()
+                    .filter(user -> user.getEmail().equalsIgnoreCase(email.get()))
+                    .collect(Collectors.toList());
+        }
+
+        return users.stream().map(UserResponse::new).collect(Collectors.toList());
+    }
+
 
     @SneakyThrows
     public boolean deleteById(String id)

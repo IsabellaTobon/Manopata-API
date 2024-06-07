@@ -42,6 +42,8 @@ public class UserController {
         return ResponseEntity.ok(userResponse);
     }
 
+
+
     //UPDATE USER INFORMATION
     @PutMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserResponse> updateUser(@RequestBody UserRequest request) {

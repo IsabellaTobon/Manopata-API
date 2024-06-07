@@ -37,11 +37,3 @@ create table if not exists comments (
 	userId varchar(255) not null,
 	postId varchar(255) not null
 );
-
-create table if not exists comments (
-	id text primary key,
-	bodyText text not null,
-	likes int default 0,
-	userId text not null,
-	postId text not null
-);
