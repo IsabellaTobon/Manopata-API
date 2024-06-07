@@ -20,6 +20,6 @@ public class User {
     private String email;
     private String lastname;
     private String nickname;
-    private String user_password;
-    private String rol_id;
+    private String password;
+    private String role;
 }

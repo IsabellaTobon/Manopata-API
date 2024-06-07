@@ -14,8 +14,8 @@ public class UserRequest
     private String email;
     private String lastname;
     private String nickname;
-    private String user_password;
-    private String rol_id;
+    private String password;
+    private String role;
 
     public User toModel (String id)
     {
@@ -25,8 +25,8 @@ public class UserRequest
         model.setEmail(this.email);
         model.setLastname(this.lastname);
         model.setNickname(this.nickname);
-        model.setUser_password(this.user_password);
-        model.setRol_id(this.rol_id);
+        model.setPassword(this.password);
+        model.setRole(this.role);
 
         return model;
     }

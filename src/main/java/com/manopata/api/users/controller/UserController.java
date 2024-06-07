@@ -1,11 +1,13 @@
 package com.manopata.api.users.controller;
 
 import com.manopata.api.users.dto.UserRequest;
+import com.manopata.api.users.dto.UserResponse;
 import com.manopata.api.users.services.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,8 +27,8 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity createUser(@RequestBody UserRequest request) {
-        return new ResponseEntity<>(this.userService.create(request), HttpStatus.OK);
-
+    public ResponseEntity<UserResponse> createUser(@RequestBody UserRequest request)
+    {
+        return ResponseEntity.ok(this.userService.create(request));
     }
 }

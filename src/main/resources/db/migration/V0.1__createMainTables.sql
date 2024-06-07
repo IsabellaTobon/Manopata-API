@@ -9,8 +9,8 @@ create table if not exists users (
 	lastname varchar(100) not null,
 	nickname varchar(20) not null,
 	email varchar(50) not null,
-	userPassword varchar(255) not null,
-	rolId varchar(20) not null
+	password varchar(255) not null,
+	role varchar(20) not null
 );
 
 create table if not exists posts (
