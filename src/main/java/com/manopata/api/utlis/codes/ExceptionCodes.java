@@ -4,6 +4,7 @@ import lombok.Getter;
 
 public enum ExceptionCodes {
 
+    GENERIC_EXCEPTION_CODE("-1", "Generic exception. Check message below"),
     USER_EMAIL_EXISTS("00001", "This user email is already in use"),
     USER_EMAIL_NOT_EXISTS("00002", "This user email not exists"),
     USER_NICKNAME_EXISTS("00003", "This user nickname is already in use"),
