@@ -11,6 +11,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @AllArgsConstructor
 @CrossOrigin
 @RestController
@@ -23,12 +25,34 @@ public class UserController {
     @GetMapping("/test")
     public ResponseEntity test() {
         //localhost:8080/swagger-ui/index.html
-        return new ResponseEntity<>("Hola soy Isabella", HttpStatus.OK);
+        return new ResponseEntity<>("Funciona correctamente", HttpStatus.OK);
     }
 
+    // CREATE NEW USER
     @PostMapping("/create")
     public ResponseEntity<UserResponse> createUser(@RequestBody UserRequest request)
     {
         return ResponseEntity.ok(this.userService.create(request));
+    }
+
+    //SEARCH USER BY ID
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<UserResponse> getUserById(@PathVariable String id) {
+        UserResponse userResponse = this.userService.getUserById(id);
+        return ResponseEntity.ok(userResponse);
+    }
+
+    //UPDATE USER INFORMATION
+    @PutMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<UserResponse> updateUser(@RequestBody UserRequest request) {
+        UserResponse userResponse = this.userService.update(request);
+        return ResponseEntity.ok(userResponse);
+    }
+
+    //DELETE USER BY ID
+    @DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> deleteUser(@PathVariable String id) {
+        this.userService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }
