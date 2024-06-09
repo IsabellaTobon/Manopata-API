@@ -107,7 +107,7 @@ public class UserService {
 
 
     @SneakyThrows
-    public boolean deleteById(String id)
+    public void deleteById(String id)
     {
         Optional<User> optionalUser = this.userRepository.findById(id);
         if (optionalUser.isEmpty())
@@ -116,7 +116,6 @@ public class UserService {
         }
 
         this.userRepository.delete(id);
-        return true;
     }
 
 }
