@@ -1,5 +1,8 @@
 package com.manopata.api.users.services;
 
+import com.manopata.api.roles.exceptions.RoleNotExistsException;
+import com.manopata.api.roles.interfaces.models.Role;
+import com.manopata.api.roles.interfaces.repositories.RoleRepository;
 import com.manopata.api.users.dto.UserRequest;
 import com.manopata.api.users.dto.UserResponse;
 import com.manopata.api.users.exceptions.UserEmailExistsException;
@@ -8,6 +11,7 @@ import com.manopata.api.users.exceptions.UserNicknameExistsException;
 import com.manopata.api.users.exceptions.UserNotExistsException;
 import com.manopata.api.users.interfaces.repositories.UserRepository;
 import com.manopata.api.users.interfaces.models.User;
+
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
@@ -20,56 +24,49 @@ import java.util.stream.Collectors;
 public class UserService {
 
     private UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
-    public UserService(UserRepository userRepository)
-    {
+    public UserService(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
     }
 
     @SneakyThrows
-    public UserResponse create(UserRequest request)
-    {
-        if (this.userRepository.findByEmail(request.getEmail()).isPresent())
-        {
+    public UserResponse create(UserRequest request) {
+        if (this.userRepository.findByEmail(request.getEmail()).isPresent()) {
             throw new UserEmailExistsException();
         }
 
-        if (this.userRepository.findByNickname(request.getNickname()).isPresent())
-        {
+        if (this.userRepository.findByNickname(request.getNickname()).isPresent()) {
             throw new UserNicknameExistsException();
         }
+        Role role = findRoleByName(request.getRoleName());
 
         String id = UUID.randomUUID().toString();
-        User model = this.userRepository.save(request.toModel(id));
+        User model = userRepository.save(request.toModel(id, role));
         return new UserResponse(model);
     }
 
     @SneakyThrows
-    public UserResponse update(UserRequest request)
-    {
+    public UserResponse update(UserRequest request) {
         Optional<User> optionalUser = this.userRepository.findByEmail(request.getEmail());
-        if (optionalUser.isEmpty())
-        {
+        if (optionalUser.isEmpty()) {
             throw new UserEmailNotExistsException();
         }
 
         User model = optionalUser.get();
-        model = this.userRepository.save(request.toModel(model.getId()));
         return new UserResponse(model);
     }
 
     @SneakyThrows
-    public UserResponse getUserById(String id)
-    {
+    public UserResponse getUserById(String id) {
         Optional<User> optionalUser = this.userRepository.findById(id);
-        if (optionalUser.isEmpty())
-        {
+        if (optionalUser.isEmpty()) {
             throw new UserNotExistsException();
         }
 
         return new UserResponse(optionalUser.get());
     }
-
 
     public List<UserResponse> searchUsers(Optional<String> name, Optional<String> nickname, Optional<String> email) {
         List<User> users = userRepository.findAll();
@@ -107,15 +104,18 @@ public class UserService {
 
 
     @SneakyThrows
-    public void deleteById(String id)
-    {
+    public void deleteById(String id) {
         Optional<User> optionalUser = this.userRepository.findById(id);
-        if (optionalUser.isEmpty())
-        {
+        if (optionalUser.isEmpty()) {
             throw new UserNotExistsException();
         }
 
         this.userRepository.delete(id);
+//        this.userRepository.delete(optionalUser.get());
     }
 
+    private Role findRoleByName(String roleName) throws RoleNotExistsException {
+        return roleRepository.findByName(roleName)
+                .orElseThrow(() -> new RoleNotExistsException("Role not found with name: " + roleName));
+    }
 }
