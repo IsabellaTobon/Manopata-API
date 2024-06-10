@@ -7,9 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-public interface RoleRepository {
-    Role save(Role model);
-    void delete(String name);
-    Optional<Role> findById(String name);
-    List<Role> findAll();
+@Repository
+public interface JpaRoleRepository extends JpaRepository<Role, String> {
+
 }

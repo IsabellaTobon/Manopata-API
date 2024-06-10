@@ -115,7 +115,7 @@ public class UserService {
     }
 
     private Role findRoleByName(String roleName) throws RoleNotExistsException {
-        return roleRepository.findByName(roleName)
+        return roleRepository.findById(roleName)
                 .orElseThrow(() -> new RoleNotExistsException("Role not found with name: " + roleName));
     }
 }
