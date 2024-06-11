@@ -1,6 +1,7 @@
 package com.manopata.api.posts.dto;
 
 import com.manopata.api.posts.interfaces.models.Post;
+import com.manopata.api.users.interfaces.models.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -40,7 +41,7 @@ public class PostRequest
         model.setProvince(this.province);
         model.setAvailable(this.available);
         model.setLikes(this.likes);
-        model.setUserId(this.userId);
+        model.setUserId(new User(this.userId));
 
         return model;
     }

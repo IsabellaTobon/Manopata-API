@@ -37,7 +37,7 @@ public class PostService {
         post.setProvince(request.getProvince());
         post.setAvailable(request.getAvailable());
         post.setLikes(request.getLikes());
-        post.setUserId(request.getUserId());
+//      post.setUser(userId);
         Post savedPost = postRepository.save(post);
         return new PostResponse(savedPost);
     }
@@ -61,7 +61,6 @@ public class PostService {
         post.setProvince(request.getProvince());
         post.setAvailable(request.getAvailable());
         post.setLikes(request.getLikes());
-        post.setUserId(request.getUserId());
         Post updatedPost = postRepository.save(post);
         return new PostResponse(updatedPost);
     }

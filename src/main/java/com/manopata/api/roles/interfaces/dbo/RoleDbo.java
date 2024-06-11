@@ -26,16 +26,6 @@ public class RoleDbo implements RoleRepository {
     }
 
     @Override
-    public Role save(Role model) {
-        return this.repository.save(model);
-    }
-
-    @Override
-    public void delete(String name) {
-        this.repository.deleteById(name);
-    }
-
-    @Override
     public Optional<Role> findById(String name) {
         return this.repository.findById(name);
     }

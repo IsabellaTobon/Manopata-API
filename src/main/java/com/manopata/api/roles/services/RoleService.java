@@ -22,7 +22,4 @@ public class RoleService {
         return roleRepository.findById(name);
     }
 
-    public void deleteById(String name) {
-        roleRepository.delete(name);
-    }
 }

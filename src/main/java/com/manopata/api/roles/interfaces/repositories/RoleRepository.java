@@ -8,8 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface RoleRepository {
-    Role save(Role model);
-    void delete(String name);
+
     Optional<Role> findById(String name);
     List<Role> findAll();
 }

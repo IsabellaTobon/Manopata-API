@@ -2,7 +2,6 @@ package com.manopata.api.roles.controller;
 
 import com.manopata.api.roles.services.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -16,11 +15,7 @@ public class RoleController {
         this.roleService = roleService;
     }
 
-    @DeleteMapping("/{name}")
-    public ResponseEntity<Void> deleteRole(@PathVariable String name) {
-        roleService.deleteById(name);
-        return ResponseEntity.noContent().build();
-    }
+
 
 //    public RoleController(RoleService roleService) {
 //        this.roleService = roleService;
