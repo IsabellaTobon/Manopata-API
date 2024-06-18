@@ -1,10 +1,10 @@
-package com.manopata.api.users.dto;
+package com.manopata.api.auth.dto;
 
 import lombok.Data;
 
 @Data
-public class LoginRequest {
-
+public class LoginRequest
+{
     private String username;
     private String password;
 }

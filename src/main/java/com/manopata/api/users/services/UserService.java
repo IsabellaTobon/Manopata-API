@@ -5,6 +5,7 @@ import com.manopata.api.roles.interfaces.models.Role;
 import com.manopata.api.roles.interfaces.repositories.RoleRepository;
 import com.manopata.api.users.dto.UserRequest;
 import com.manopata.api.users.dto.UserResponse;
+import com.manopata.api.users.dto.UserWithPasswordResponse;
 import com.manopata.api.users.exceptions.UserEmailExistsException;
 import com.manopata.api.users.exceptions.UserEmailNotExistsException;
 import com.manopata.api.users.exceptions.UserNicknameExistsException;
@@ -66,6 +67,14 @@ public class UserService {
         }
 
         return new UserResponse(optionalUser.get());
+    }
+
+    @SneakyThrows
+    public UserWithPasswordResponse getUserByUsername(String nickname)
+    {
+        Optional<User> optionalUser = this.userRepository.findByNickname(nickname);
+        if (optionalUser.isPresent()) { return new UserWithPasswordResponse(optionalUser.get()); }
+        throw new UserNotExistsException();
     }
 
     public List<UserResponse> searchUsers(Optional<String> name, Optional<String> nickname, Optional<String> email) {
