@@ -22,12 +22,6 @@ public class UserController {
     @Autowired
     private final UserService userService;
 
-    @GetMapping("/test")
-    public ResponseEntity test() {
-        //localhost:8080/swagger-ui/index.html
-        return new ResponseEntity<>("Funciona correctamente", HttpStatus.OK);
-    }
-
     // CREATE NEW USER
     @PostMapping("/create")
     public ResponseEntity<UserResponse> createUser(@RequestBody UserRequest request)
