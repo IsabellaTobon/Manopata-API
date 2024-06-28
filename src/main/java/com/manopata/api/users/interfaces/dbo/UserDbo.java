@@ -36,7 +36,7 @@ public class UserDbo implements UserRepository {
 
     @Override
     public Optional<User> findById(String id) {
-        return Optional.empty();
+        return this.repository.findById(id);
     }
 
     @Override

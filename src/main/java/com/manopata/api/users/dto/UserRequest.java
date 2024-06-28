@@ -27,7 +27,7 @@ public class UserRequest
         model.setLastname(this.lastname);
         model.setNickname(this.nickname);
         model.setPassword(this.password);
-        model.setRole(role);
+        model.setRole(role.getName());
 
         return model;
     }

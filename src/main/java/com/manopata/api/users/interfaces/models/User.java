@@ -24,18 +24,5 @@ public class User {
     private String lastname;
     private String nickname;
     private String password;
-//    private String role;
-
-    @ManyToOne
-    @JoinColumn(name = "role", referencedColumnName = "name")
-    private Role role;
-
-    @OneToMany(mappedBy = "user")
-    private Set<Post> posts; // Relation 1:N
-
-    @OneToMany(mappedBy = "user")
-    private Set<Comment> comments; // Relation 1:N
-
-    public User(String userId) {
-    }
+    private String role;
 }

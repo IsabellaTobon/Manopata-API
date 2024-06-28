@@ -1,6 +1,7 @@
 package com.manopata.api.roles.interfaces.dbo;
 
 import com.manopata.api.roles.interfaces.models.Role;
+import com.manopata.api.roles.interfaces.queries.RoleQueries;
 import com.manopata.api.roles.interfaces.repositories.JpaRoleRepository;
 import com.manopata.api.roles.interfaces.repositories.RoleRepository;
 import jakarta.persistence.EntityManager;
@@ -16,22 +17,36 @@ import java.util.Optional;
 @Primary
 @Transactional
 public class RoleDbo implements RoleRepository {
-    private final JpaRoleRepository repository;
+    private JpaRoleRepository roleRepository;
 
     @PersistenceContext
     private EntityManager entityManager;
 
-    public RoleDbo(JpaRoleRepository repository) {
-        this.repository = repository;
+    public RoleDbo(
+            JpaRoleRepository roleRepository
+    ) {
+        this.roleRepository = roleRepository;
     }
 
     @Override
     public Optional<Role> findById(String name) {
-        return this.repository.findById(name);
+        return this.roleRepository.findById(name);
     }
 
     @Override
     public List<Role> findAll() {
-        return this.repository.findAll();
+        return this.roleRepository.findAll();
+    }
+
+    @Override
+    public boolean isRoleEndpointtEnable(String role, String endpoint)
+    {
+        String query = RoleQueries.CHECK_TOKEN_PERMISSION;
+        Number counter = (Number) entityManager.createNativeQuery(query)
+                .setParameter("role", role)
+                .setParameter("endpoint", endpoint)
+                .getSingleResult();
+
+        return counter.intValue() > 0;
     }
 }

@@ -13,7 +13,9 @@ import com.manopata.api.users.exceptions.UserNotExistsException;
 import com.manopata.api.users.interfaces.repositories.UserRepository;
 import com.manopata.api.users.interfaces.models.User;
 
+import com.manopata.api.utlis.auth.JwtTokenUtil;
 import lombok.SneakyThrows;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,6 +28,9 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
 
     public UserService(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
@@ -127,5 +132,13 @@ public class UserService {
     private Role findRoleByName(String roleName) throws RoleNotExistsException {
         return roleRepository.findById(roleName)
                 .orElseThrow(() -> new RoleNotExistsException("Role not found with name: " + roleName));
+    }
+
+    public boolean isTokenValid(String token, String endpoint)
+    {
+        String username = this.jwtTokenUtil.getKey(token); // TODO for logging purposes
+        String role = this.jwtTokenUtil.getValue(token);
+
+        return this.roleRepository.isRoleEndpointtEnable(role, endpoint);
     }
 }

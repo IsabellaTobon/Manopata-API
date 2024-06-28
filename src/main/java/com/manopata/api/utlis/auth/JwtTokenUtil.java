@@ -1,11 +1,13 @@
 package com.manopata.api.utlis.auth;
 
 import com.manopata.api.auth.dto.TokenResponse;
+import com.manopata.api.auth.exceptions.InvalidTokenException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.xml.bind.DatatypeConverter;
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.spec.SecretKeySpec;
@@ -54,8 +56,28 @@ public class JwtTokenUtil {
         return builder.compact();
     }
 
+    @SneakyThrows
     private Claims getClaims(String token)
     {
-        return Jwts.parser().setSigningKey(DatatypeConverter.parseBase64Binary(key)).build().parseSignedClaims(token).getPayload();
+        try
+        {
+            return Jwts.parser().setSigningKey(DatatypeConverter.parseBase64Binary(key)).build().parseSignedClaims(token).getPayload();
+        }
+        catch (Exception e)
+        {
+            throw new InvalidTokenException();
+        }
+    }
+
+    public String getValue(String token)
+    {
+        Claims claims = this.getClaims(token);
+        return claims.getSubject();
+    }
+
+    public String getKey(String token)
+    {
+        Claims claims = this.getClaims(token);
+        return claims.getId();
     }
 }

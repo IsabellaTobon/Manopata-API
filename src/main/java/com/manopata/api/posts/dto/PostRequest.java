@@ -41,7 +41,7 @@ public class PostRequest
         model.setProvince(this.province);
         model.setAvailable(this.available);
         model.setLikes(this.likes);
-        model.setUserId(new User(this.userId));
+        model.setUserId(this.userId);
 
         return model;
     }

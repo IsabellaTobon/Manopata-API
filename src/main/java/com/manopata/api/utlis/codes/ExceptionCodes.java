@@ -10,7 +10,8 @@ public enum ExceptionCodes {
     USER_NICKNAME_EXISTS("00003", "This user nickname is already in use"),
     USER_NOT_EXISTS("00004", "This user doesn't exist yet"),
     ROLE_NOT_EXISTS("00005", "Role not found"),
-    AUTH_WRONG_CREDENTIALS("00006", "Invalid credentials");
+    AUTH_WRONG_CREDENTIALS("00006", "Invalid credentials"),
+    INVALID_TOKEN("00007", "Invalid token");
 
     @Getter
     private final String errorCode;

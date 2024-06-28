@@ -11,4 +11,5 @@ public interface RoleRepository {
 
     Optional<Role> findById(String name);
     List<Role> findAll();
+    boolean isRoleEndpointtEnable(String role, String endpoint);
 }

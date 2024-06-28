@@ -29,16 +29,5 @@ public class Post {
     private String province;
     private Boolean available;
     private Integer likes = 0;
-
-    @ManyToOne
-    @JoinColumn(name = "userId")
-    private User user; // Relation N:1
-
-    //NO ESTOY SEGURA DE ESTO
-    public void setUserId(User user) {
-    }
-
-    public String getUserId() {
-        return null;
-    }
+    private String userId;
 }

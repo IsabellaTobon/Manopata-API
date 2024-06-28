@@ -24,6 +24,6 @@ public class UserResponse
         this.email = model.getEmail();
         this.lastname = model.getLastname();
         this.nickname = model.getNickname();
-        this.role = model.getRole().getName();
+        this.role = model.getRole();
     }
 }

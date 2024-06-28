@@ -1,23 +1,22 @@
 package com.manopata.api.roles.interfaces.models;
 
-import com.manopata.api.users.interfaces.models.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
-
 @Entity
-@Table(name = "roles")
+@Table(name = "roleendpoint")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Role {
+public class RoleEndpoint
+{
     @Id
-    private String name;
-    private String description;
+    private String id;
+    private String role;
+    private String request;
+    private boolean enabled;
 }
