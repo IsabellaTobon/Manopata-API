@@ -10,7 +10,8 @@ create table if not exists users (
 	nickname varchar(20) not null,
 	email varchar(50) not null,
 	password varchar(255) not null,
-	role varchar(20) not null
+	role varchar(20) not null,
+	foreign key (role) references roles(name)
 );
 
 create table if not exists posts (
@@ -27,7 +28,8 @@ create table if not exists posts (
 	province varchar(50) not null,
 	available boolean,
 	likes int default 0,
-	userId varchar(255) not null
+	userId varchar(255) not null,
+	foreign key (userId) references users(id)
 );
 
 create table if not exists comments (
@@ -35,5 +37,7 @@ create table if not exists comments (
 	bodyText text not null,
 	likes int default 0,
 	userId varchar(255) not null,
-	postId varchar(255) not null
+	postId varchar(255) not null,
+	foreign key (userId) references users(id),
+    foreign key (postId) references posts(id)
 );
