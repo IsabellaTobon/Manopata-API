@@ -14,7 +14,6 @@ import com.manopata.api.users.interfaces.repositories.UserRepository;
 import com.manopata.api.users.interfaces.models.User;
 
 import lombok.SneakyThrows;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,12 +26,10 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
-    private final BCryptPasswordEncoder passwordEncoder;
 
     public UserService(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
-        this.passwordEncoder = new BCryptPasswordEncoder();
     }
 
     @SneakyThrows
@@ -45,11 +42,8 @@ public class UserService {
             throw new UserNicknameExistsException();
         }
         Role role = findRoleByName(request.getRoleName());
-
         String id = UUID.randomUUID().toString();
-        String encodedPassword = passwordEncoder.encode(request.getPassword());
-        User model = request.toModel(id, role, encodedPassword);
-        userRepository.save(model);
+        User model = this.userRepository.save(request.toModel(id, role));
         return new UserResponse(model);
     }
 
@@ -61,10 +55,6 @@ public class UserService {
         }
 
         User model = optionalUser.get();
-        model.setName(request.getName());
-        model.setLastname(request.getLastname());
-        model.setNickname(request.getNickname());
-        model.setPassword(passwordEncoder.encode(request.getPassword()));
         userRepository.save(model);
 
         return new UserResponse(model);

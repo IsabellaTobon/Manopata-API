@@ -18,7 +18,7 @@ public class UserRequest
     private String password;
     private String roleName;
 
-    public User toModel (String id, Role role, String encodedPassword)
+    public User toModel (String id, Role role)
     {
         User model = new User();
         model.setId(id);
@@ -26,7 +26,7 @@ public class UserRequest
         model.setEmail(this.email);
         model.setLastname(this.lastname);
         model.setNickname(this.nickname);
-        model.setPassword(encodedPassword);
+        model.setPassword(this.password);
         model.setRole(role);
 
         return model;
