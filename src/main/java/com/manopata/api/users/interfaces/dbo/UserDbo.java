@@ -38,7 +38,6 @@ public class UserDbo implements UserRepository {
     public Optional<User> findById(String id) {
         return this.repository.findById(id);
     }
-
     @Override
     public List<User> findByName(String name) {
         return this.repository.findByName(name);

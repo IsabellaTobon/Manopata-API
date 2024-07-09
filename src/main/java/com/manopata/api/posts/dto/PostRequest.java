@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PostRequest
 {
+    private String photo;
     private String text;
     private String registerDate;
     private String name;
@@ -29,6 +30,7 @@ public class PostRequest
     {
         Post model = new Post();
         model.setId(id);
+        model.setPhoto(this.photo);
         model.setText(this.text);
         model.setRegisterDate(this.registerDate);
         model.setName(this.name);
@@ -45,5 +47,7 @@ public class PostRequest
 
         return model;
     }
+
+
 }
 

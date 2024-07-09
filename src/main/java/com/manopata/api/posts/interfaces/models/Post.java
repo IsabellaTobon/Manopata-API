@@ -17,6 +17,7 @@ import java.util.Set;
 public class Post {
     @Id
     private String id;
+    private String photo;
     private String text;
     private String registerDate;
     private String name;

@@ -25,6 +25,7 @@ public class PostService {
         String id = UUID.randomUUID().toString();
         Post post = new Post();
         post.setId(id);
+        post.setPhoto(request.getPhoto());
         post.setText(request.getText());
         post.setRegisterDate(request.getRegisterDate());
         post.setName(request.getName());
@@ -49,6 +50,7 @@ public class PostService {
             throw new PostNotFoundException("Post not found with id " + id);
         }
         Post post = optionalPost.get();
+        post.setPhoto(request.getPhoto());
         post.setText(request.getText());
         post.setRegisterDate(request.getRegisterDate());
         post.setName(request.getName());
