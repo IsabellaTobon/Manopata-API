@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
@@ -19,7 +20,7 @@ public class Post {
     private String id;
     private String photo;
     private String text;
-    private String registerDate;
+    private LocalDate registerDate = LocalDate.now();
     private String name;
     private Integer age;
     private String animalType;

@@ -9,6 +9,7 @@ import com.manopata.api.posts.interfaces.repositories.PostRepository;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -29,7 +30,7 @@ public class PostService {
         post.setId(id);
         post.setPhoto(request.getPhoto());
         post.setText(request.getText());
-        post.setRegisterDate(request.getRegisterDate());
+        post.setRegisterDate(LocalDate.now());
         post.setName(request.getName());
         post.setAge(request.getAge());
         post.setAnimalType(request.getAnimalType());
@@ -53,7 +54,6 @@ public class PostService {
         Post post = optionalPost.get();
         post.setPhoto(request.getPhoto());
         post.setText(request.getText());
-        post.setRegisterDate(request.getRegisterDate());
         post.setName(request.getName());
         post.setAge(request.getAge());
         post.setAnimalType(request.getAnimalType());
@@ -75,6 +75,7 @@ public class PostService {
         if (optionalUser.isEmpty()) {
             throw new PostNotFoundException("Post not found with id " + id);
         }
+//        postRepository.delete(optionalPost.get());
         this.postRepository.delete(id);
     }
 

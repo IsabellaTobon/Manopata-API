@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -32,7 +34,7 @@ public class PostRequest
         model.setId(id);
         model.setPhoto(this.photo);
         model.setText(this.text);
-        model.setRegisterDate(this.registerDate);
+        model.setRegisterDate(LocalDate.parse(this.registerDate));
         model.setName(this.name);
         model.setAge(this.age);
         model.setAnimalType(this.animalType);
