@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 public class PostResponse
 {
     private String id;
+    private String photo;
     private String text;
     private String registerDate;
     private String name;
@@ -28,6 +29,7 @@ public class PostResponse
     public PostResponse (Post model)
     {
         this.id = model.getId();
+        this.photo = model.getPhoto();
         this.text = model.getText();
         this.registerDate = model.getRegisterDate();
         this.name = model.getName();

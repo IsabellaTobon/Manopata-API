@@ -9,8 +9,10 @@ import com.manopata.api.posts.interfaces.repositories.PostRepository;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class PostService {
@@ -38,7 +40,6 @@ public class PostService {
         post.setProvince(request.getProvince());
         post.setAvailable(request.getAvailable());
         post.setLikes(request.getLikes());
-//      post.setUser(userId);
         Post savedPost = postRepository.save(post);
         return new PostResponse(savedPost);
     }
@@ -75,5 +76,10 @@ public class PostService {
             throw new PostNotFoundException("Post not found with id " + id);
         }
         this.postRepository.delete(id);
+    }
+
+    public List<PostResponse> getAllPosts() {
+        List<Post> posts = postRepository.findAll();
+        return posts.stream().map(PostResponse::new).collect(Collectors.toList());
     }
 }

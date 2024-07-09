@@ -9,8 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-//@AllArgsConstructor
-//@CrossOrigin
+import java.util.List;
+
+
 @RestController
 @RequestMapping("/posts")
 
@@ -23,6 +24,10 @@ public class PostController {
         this.postService = postService;
     }
 
+    @GetMapping
+    public List<PostResponse> getAllPosts() {
+        return postService.getAllPosts();
+    }
     @PostMapping("/create")
     public ResponseEntity<PostResponse> createPost(@RequestBody PostRequest request) {
         PostResponse response = postService.create(request);
