@@ -46,9 +46,10 @@ public class UserService {
         if (this.userRepository.findByNickname(request.getNickname()).isPresent()) {
             throw new UserNicknameExistsException();
         }
-        Role role = findRoleByName(request.getRoleName());
+//        Role role = findRoleByName(request.getRoleName());
+        Role role = findRoleByName("USER");
         String id = UUID.randomUUID().toString();
-        User model = this.userRepository.save(request.toModel(id, role));
+        User model = this.userRepository.save(request.toModel(id, "USER"));
         return new UserResponse(model);
     }
 

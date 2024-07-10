@@ -12,9 +12,9 @@ public class UserWithPasswordResponse
 {
     private String id;
     private String name;
-    private String email;
     private String lastname;
     private String nickname;
+    private String email;
     private String password;
     private String role;
 
@@ -22,10 +22,10 @@ public class UserWithPasswordResponse
     {
         this.id = model.getId();
         this.name = model.getName();
-        this.email = model.getEmail();
         this.lastname = model.getLastname();
         this.nickname = model.getNickname();
-        this.role = model.getRole();
+        this.email = model.getEmail();
         this.password = model.getPassword();
+        this.role = model.getRole();
     }
 }

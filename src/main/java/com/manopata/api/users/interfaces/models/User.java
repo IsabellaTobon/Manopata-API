@@ -1,8 +1,5 @@
 package com.manopata.api.users.interfaces.models;
 
-import com.manopata.api.comments.interfaces.models.Comment;
-import com.manopata.api.posts.interfaces.models.Post;
-import com.manopata.api.roles.interfaces.models.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,4 +22,5 @@ public class User {
     private String nickname;
     private String password;
     private String role;
+
 }
