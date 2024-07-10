@@ -12,9 +12,9 @@ import lombok.NoArgsConstructor;
 public class UserRequest
 {
     private String name;
-    private String email;
     private String lastname;
     private String nickname;
+    private String email;
     private String password;
     private String roleName;
 
@@ -23,9 +23,9 @@ public class UserRequest
         User model = new User();
         model.setId(id);
         model.setName(this.name);
-        model.setEmail(this.email);
         model.setLastname(this.lastname);
         model.setNickname(this.nickname);
+        model.setEmail(this.email);
         model.setPassword(this.password);
         model.setRole(role.getName());
 

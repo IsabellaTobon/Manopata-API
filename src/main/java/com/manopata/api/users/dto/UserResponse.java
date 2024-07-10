@@ -12,18 +12,18 @@ public class UserResponse
 {
     private String id;
     private String name;
-    private String email;
     private String lastname;
     private String nickname;
+    private String email;
     private String role;
 
     public UserResponse (User model)
     {
         this.id = model.getId();
         this.name = model.getName();
-        this.email = model.getEmail();
         this.lastname = model.getLastname();
         this.nickname = model.getNickname();
+        this.email = model.getEmail();
         this.role = model.getRole();
     }
 }

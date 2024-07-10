@@ -32,7 +32,9 @@ public class UserController {
     @PostMapping("/create")
     public ResponseEntity<UserResponse> createUser(@RequestBody UserRequest request)
     {
-        return ResponseEntity.ok(this.userService.create(request));
+        UserResponse userResponse = this.userService.create(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(userResponse);
+//        return ResponseEntity.ok(this.userService.create(request));
     }
 
     //SEARCH USER BY ID
@@ -63,5 +65,5 @@ public class UserController {
         this.userService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
-    //
+
 }
