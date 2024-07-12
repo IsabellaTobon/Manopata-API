@@ -2,6 +2,7 @@ package com.manopata.api.protectors.controller;
 
 import com.manopata.api.protectors.dto.ProtectorRequest;
 import com.manopata.api.protectors.dto.ProtectorResponse;
+import com.manopata.api.protectors.exceptions.ProtectorNotFoundException;
 import com.manopata.api.protectors.service.ProtectorService;
 import com.manopata.api.protectors.exceptions.ResourceNotFoundException;
 import com.manopata.api.protectors.model.Protector;
@@ -23,6 +24,12 @@ public class ProtectorController {
         return protectorService.getAllProtectors();
     }
 
+    @GetMapping("/byname/{name}")
+    public ProtectorResponse getProtectorByName(@PathVariable String name) {
+        Optional<ProtectorResponse> optionalProtector = protectorService.getProtectorByName(name);
+        return optionalProtector.orElseThrow(() -> new ProtectorNotFoundException("Protector not found with name: " + name));
+    }
+
     @PostMapping
     public ProtectorResponse createProtector(@RequestBody ProtectorRequest protectorRequest) {
         return protectorService.saveProtector(protectorRequest);
@@ -38,33 +45,4 @@ public class ProtectorController {
         protectorService.deleteProtector(UUID.fromString(id));
     }
 
-//    @GetMapping
-//    public List<Protector> getAllProtectors() {
-//        return protectorService.getAllProtectors();
-//    }
-//
-//    @PostMapping
-//    public Protector createProtector(@RequestBody Protector protector) {
-//        return protectorService.saveProtector(protector);
-//    }
-//
-//    @PutMapping("/{id}")
-//    public Protector updateProtector(@PathVariable String id, @RequestBody Protector protectorDetails) {
-//        Optional<Protector> optionalProtector = protectorService.getProtectorById(String.valueOf(UUID.fromString(id)));
-//        if (optionalProtector.isPresent()) {
-//            Protector protector = optionalProtector.get();
-//            protector.setName(protectorDetails.getName());
-//            protector.setDescription(protectorDetails.getDescription());
-//            protector.setPhone(protectorDetails.getPhone());
-//            protector.setEmail(protectorDetails.getEmail());
-//            return protectorService.saveProtector(protector);
-//        } else {
-//            throw new ResourceNotFoundException("Protector not found with id " + id);
-//        }
-//    }
-//
-//    @DeleteMapping("/{id}")
-//    public void deleteProtector(@PathVariable String id) {
-//        protectorService.deleteProtector(String.valueOf(UUID.fromString(id)));
-//    }
 }

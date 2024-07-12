@@ -23,6 +23,11 @@ public class ProtectorService {
                 .collect(Collectors.toList());
     }
 
+    public Optional<ProtectorResponse> getProtectorByName(String name) {
+        Optional<Protector> optionalProtector = protectorRepository.findByName(name);
+        return optionalProtector.map(this::convertToResponse);
+    }
+
     public ProtectorResponse saveProtector(ProtectorRequest protectorRequest) {
         Protector protector = new Protector();
         protector.setName(protectorRequest.getName());
@@ -62,19 +67,4 @@ public class ProtectorService {
         return response;
     }
 
-//    public List<Protector> getAllProtectors() {
-//        return protectorRepository.findAll();
-//    }
-//
-//    public Protector saveProtector(Protector protector) {
-//        return protectorRepository.save(protector);
-//    }
-//
-//    public Optional<Protector> getProtectorById(String id) {
-//        return protectorRepository.findById(id);
-//    }
-//
-//    public void deleteProtector(String id) {
-//        protectorRepository.deleteById(id);
-//    }
 }
