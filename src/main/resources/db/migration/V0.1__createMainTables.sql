@@ -41,3 +41,13 @@ create table if not exists comments (
 	foreign key (userId) references users(id),
     foreign key (postId) references posts(id)
 );
+
+create table if not exists protectors (
+    id VARCHAR(255) PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    description TEXT NOT NULL,
+    phone VARCHAR(13) NOT NULL,
+    email VARCHAR(50) NOT NULL
+);
+
+
