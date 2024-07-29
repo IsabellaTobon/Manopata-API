@@ -1,6 +1,6 @@
 package com.manopata.api.protectors.repository;
 
-import com.manopata.api.protectors.model.Protector;
+import com.manopata.api.protectors.models.Protector;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

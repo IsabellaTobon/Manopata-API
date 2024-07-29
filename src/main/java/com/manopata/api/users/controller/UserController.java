@@ -8,16 +8,11 @@ import com.manopata.api.utlis.shared.EndpointUtils;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
 
 @AllArgsConstructor
 @CrossOrigin
@@ -25,7 +20,6 @@ import java.util.Optional;
 @RequestMapping("/users")
 public class UserController {
 
-    @Autowired
     private final UserService userService;
 
     // CREATE NEW USER
@@ -49,7 +43,7 @@ public class UserController {
             UserResponse userResponse = this.userService.getUserById(id);
             return ResponseEntity.ok(userResponse);
         }
-        throw new InvalidTokenException();
+        throw new InvalidTokenException("Invalid token");
     }
 
     //UPDATE USER INFORMATION

@@ -65,7 +65,7 @@ public class JwtTokenUtil {
         }
         catch (Exception e)
         {
-            throw new InvalidTokenException();
+            throw new InvalidTokenException("Invalid token");
         }
     }
 

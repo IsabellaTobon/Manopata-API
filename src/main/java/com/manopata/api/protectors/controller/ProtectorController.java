@@ -4,8 +4,6 @@ import com.manopata.api.protectors.dto.ProtectorRequest;
 import com.manopata.api.protectors.dto.ProtectorResponse;
 import com.manopata.api.protectors.exceptions.ProtectorNotFoundException;
 import com.manopata.api.protectors.service.ProtectorService;
-import com.manopata.api.protectors.exceptions.ResourceNotFoundException;
-import com.manopata.api.protectors.model.Protector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

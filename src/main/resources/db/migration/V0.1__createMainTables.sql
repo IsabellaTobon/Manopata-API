@@ -32,18 +32,20 @@ create table if not exists posts (
 	foreign key (userId) references users(id)
 );
 
-create table if not exists comments (
+create table if not exists messages (
 	id varchar(255) primary key not null,
 	bodyText text not null,
-	likes int default 0,
-	userId varchar(255) not null,
-	postId varchar(255) not null,
-	foreign key (userId) references users(id),
+	sentDate timestamp default current_timestamp not null,
+    senderId varchar(255) not null,
+    receiverId varchar(255) not null,
+    postId varchar(255) not null,
+    foreign key (senderId) references users(id),
+    foreign key (receiverId) references users(id),
     foreign key (postId) references posts(id)
 );
 
 create table if not exists protectors (
-    id VARCHAR(255) PRIMARY KEY,
+    id VARCHAR(255) primary key not null,
     name VARCHAR(50) NOT NULL,
     description TEXT NOT NULL,
     phone VARCHAR(13) NOT NULL,

@@ -1,4 +1,4 @@
-package com.manopata.api.protectors.model;
+package com.manopata.api.protectors.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

@@ -3,7 +3,7 @@ package com.manopata.api.protectors.service;
 import com.manopata.api.protectors.dto.ProtectorRequest;
 import com.manopata.api.protectors.dto.ProtectorResponse;
 import com.manopata.api.protectors.exceptions.ResourceNotFoundException;
-import com.manopata.api.protectors.model.Protector;
+import com.manopata.api.protectors.models.Protector;
 import com.manopata.api.protectors.repository.ProtectorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

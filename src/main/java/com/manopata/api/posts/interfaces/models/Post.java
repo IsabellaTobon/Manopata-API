@@ -1,14 +1,11 @@
 package com.manopata.api.posts.interfaces.models;
 
-import com.manopata.api.comments.interfaces.models.Comment;
-import com.manopata.api.users.interfaces.models.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.Set;
 
 @Entity
 @Table(name = "posts")

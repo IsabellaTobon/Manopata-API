@@ -1,4 +1,4 @@
-INSERT INTO roleendpoint (id, role, endpoint, status) VALUES
+INSERT INTO roleEndpoint (id, role, endpoint, status) VALUES
 ('5980bf81-03ef-4ad9-b649-95921a049f48', 'USER', '/users/create', TRUE),
 ('860937ba-3bf0-4cfb-8744-85a7ac6f18af', 'ADMIN', '/users/create', TRUE),
 ('7bd6b8ec-982f-4e63-9259-78e69f721b47', 'USER', '/users/update', TRUE),
@@ -13,8 +13,12 @@ INSERT INTO roleendpoint (id, role, endpoint, status) VALUES
 ('66141039-6c96-453d-bf07-a835147f8925', 'ADMIN', '/posts', TRUE),
 ('b7d64172-5c90-47fc-895c-2ba886483cce', 'USER', '/posts/delete', FALSE),
 ('1023aa49-dde5-44e4-b126-2411ec76f3f8', 'ADMIN', '/posts/delete', TRUE),
-('ca708bf6-df03-4ff5-a9b5-c35f7ca7a5bc', 'USER', '/comments', TRUE),
-('4a9c7382-a51b-4377-8d17-5f349817ddbc', 'ADMIN', '/comments', TRUE),
+('ca708bf6-df03-4ff5-a9b5-c35f7ca7a5bc', 'USER', '/messages', TRUE),
+('4a9c7382-a51b-4377-8d17-5f349817ddbc', 'ADMIN', '/messages', TRUE),
+('a863d73d-87bd-4f2b-81f1-4a7e0a972a3a', 'USER', '/messages/user', TRUE),
+('c4f65a10-6d16-4fa8-a1c9-22ae781c0820', 'ADMIN', '/messages/user', TRUE),
+('829c40e9-5f66-487d-99b2-3b4603e9715e', 'USER', '/messages/post', TRUE),
+('26f867e5-eb8b-4bb6-b59d-dc27bd6e11c4', 'ADMIN', '/messages/post', TRUE),
 ('4ad6c53b-4fe8-4e63-b3ec-38aaef3a142d', 'USER', '/protectors', FALSE),
 ('8d596d4b-8156-45f1-9d85-2fada9111e32', 'ADMIN', '/protectors', TRUE),
 ('2a08041c-2ecf-408d-8efc-b954cfe07d08', 'USER', '/protectors/byName', TRUE),
