@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
+import java.util.Calendar;
 import java.util.Date;
 
 @Component
@@ -44,14 +45,19 @@ public class JwtTokenUtil {
         byte[] secretBytes = DatatypeConverter.parseBase64Binary(this.key);
         Key signedKey = new SecretKeySpec(secretBytes, signatureAlgorithm.getJcaName());
 
+        Calendar calendar = Calendar.getInstance();
+
+        calendar.setTime(now);
+        calendar.add(Calendar.DAY_OF_YEAR, -2);
+        Date expirationDate = calendar.getTime();
+
         JwtBuilder builder = Jwts.builder()
                 .setId(id)
                 .setIssuedAt(now)
                 .setSubject(subject)
                 .setIssuer(issuer)
-                .signWith(signatureAlgorithm, signedKey);
-
-        Date expirationDate = new Date(currentTimeMilliseconds + this.ttl);
+                .signWith(signatureAlgorithm, signedKey)
+                .setExpiration(expirationDate);
 
         return builder.compact();
     }

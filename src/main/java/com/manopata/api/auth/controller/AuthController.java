@@ -27,9 +27,9 @@ public class AuthController
 
     @SneakyThrows
     @PostMapping("/login")
-    public ResponseEntity login(@NotNull @RequestBody LoginRequest request)
+    public ResponseEntity<TokenResponse> login(@NotNull @RequestBody LoginRequest request)
     {
-        UserWithPasswordResponse user = this.userService.getUserByUsername(request.getUsername());
+        UserWithPasswordResponse user = this.userService.getUserByUsername(request.getNickname());
         if (user.getPassword().equals(request.getPassword()))
         {
             return new ResponseEntity<>(this.jwtTokenUtil.generateToken(user.getNickname(), user.getRole()),
