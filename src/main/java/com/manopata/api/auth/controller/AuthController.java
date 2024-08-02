@@ -32,10 +32,20 @@ public class AuthController
         UserWithPasswordResponse user = this.userService.getUserByUsername(request.getNickname());
         if (user.getPassword().equals(request.getPassword()))
         {
-            return new ResponseEntity<>(this.jwtTokenUtil.generateToken(user.getNickname(), user.getRole()),
-                HttpStatus.OK);
+            TokenResponse tokenResponse = this.jwtTokenUtil.generateToken(user.getNickname(), user.getRole());
+            return new ResponseEntity<>(tokenResponse, HttpStatus.OK);
         }
         throw new InvalidCredentialsException();
+
+//        UserWithPasswordResponse user = this.userService.getUserByUsername(request.getNickname());
+//        if (user.getPassword().equals(request.getPassword()))
+//        {
+//            String token = String.valueOf(this.jwtTokenUtil.generateToken(user.getNickname(), user.getRole()));
+//            return new ResponseEntity<>(new TokenResponse(token), HttpStatus.OK);
+///            return new ResponseEntity<>(this.jwtTokenUtil.generateToken(user.getNickname(), user.getRole()),
+///               HttpStatus.OK);
+//        }
+//        throw new InvalidCredentialsException();
     }
 
     @SneakyThrows

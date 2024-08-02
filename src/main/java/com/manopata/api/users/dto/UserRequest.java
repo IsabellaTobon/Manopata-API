@@ -15,9 +15,10 @@ public class UserRequest
     private String nickname;
     private String email;
     private String password;
-//    private String roleName;
+    private String role;
 
-    public User toModel (String id, String role)
+    public User toModel (String id, String encodedPassword, String role)
+
     {
         User model = new User();
         model.setId(id);
@@ -25,9 +26,10 @@ public class UserRequest
         model.setLastname(this.lastname);
         model.setNickname(this.nickname);
         model.setEmail(this.email);
-        model.setPassword(this.password);
-        model.setRole("USER");
+        model.setPassword(encodedPassword); //password codificated
+        model.setRole(role); // Use the method parameter instead of this.role
 
         return model;
     }
+
 }

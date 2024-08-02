@@ -1,6 +1,8 @@
 package com.manopata.api.users.controller;
 
 import com.manopata.api.auth.exceptions.InvalidTokenException;
+import com.manopata.api.users.dto.ChangePasswordRequest;
+import com.manopata.api.users.dto.UpdateUserRequest;
 import com.manopata.api.users.dto.UserRequest;
 import com.manopata.api.users.dto.UserResponse;
 import com.manopata.api.users.services.UserService;
@@ -48,9 +50,16 @@ public class UserController {
 
     //UPDATE USER INFORMATION
     @PutMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UserResponse> updateUser(@RequestBody UserRequest request) {
+    public ResponseEntity<UserResponse> updateUser(@RequestBody UpdateUserRequest request) {
         UserResponse userResponse = this.userService.update(request);
         return ResponseEntity.ok(userResponse);
+    }
+
+    //CHANGE PASSWORD
+    @PostMapping(value = "/change-password", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> changePassword(@RequestBody ChangePasswordRequest request) {
+        this.userService.changePassword(request);
+        return ResponseEntity.noContent().build();
     }
 
     //DELETE USER BY ID
@@ -59,5 +68,4 @@ public class UserController {
         this.userService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
-
 }

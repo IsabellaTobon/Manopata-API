@@ -36,6 +36,7 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 	implementation 'io.jsonwebtoken:jjwt:0.12.5'
+	implementation 'org.springframework.boot:spring-boot-starter-security' // Need user and password for test endpoints
 }
 
 tasks.named('test') {

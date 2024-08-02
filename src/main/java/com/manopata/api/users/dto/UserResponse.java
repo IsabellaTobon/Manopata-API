@@ -15,7 +15,7 @@ public class UserResponse
     private String lastname;
     private String nickname;
     private String email;
-    private String role;
+//    private String role;
 
     public UserResponse (User model)
     {
@@ -24,6 +24,5 @@ public class UserResponse
         this.lastname = model.getLastname();
         this.nickname = model.getNickname();
         this.email = model.getEmail();
-        this.role = model.getRole();
     }
 }

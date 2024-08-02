@@ -24,10 +24,8 @@ public class JwtTokenUtil {
 
     public TokenResponse generateToken(String username, String role)
     {
-        TokenResponse token = new TokenResponse();
-        token.setToken(this.createToken(username, role));
-
-        return token;
+        String tokenString = this.createToken(username, role); // Create token like String
+        return new TokenResponse(tokenString);
     }
 
     public boolean isTokenStillValid(String token)
@@ -45,11 +43,14 @@ public class JwtTokenUtil {
         byte[] secretBytes = DatatypeConverter.parseBase64Binary(this.key);
         Key signedKey = new SecretKeySpec(secretBytes, signatureAlgorithm.getJcaName());
 
-        Calendar calendar = Calendar.getInstance();
+        // Sum the TTL for obtain expiration date
+        Date expirationDate = new Date(currentTimeMilliseconds + ttl);
 
-        calendar.setTime(now);
-        calendar.add(Calendar.DAY_OF_YEAR, -2);
-        Date expirationDate = calendar.getTime();
+//        Calendar calendar = Calendar.getInstance();
+
+//        calendar.setTime(now);
+//        calendar.add(Calendar.DAY_OF_YEAR, -2);
+//        Date expirationDate = calendar.getTime();
 
         JwtBuilder builder = Jwts.builder()
                 .setId(id)
