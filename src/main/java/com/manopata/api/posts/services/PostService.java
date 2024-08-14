@@ -81,10 +81,4 @@ public class PostService {
         return postRepository.findAll().stream().map(PostResponse::new).collect(Collectors.toList());
     }
 
-    // Nuevo método para obtener los 4 últimos posts
-    public List<PostResponse> getLatestPosts() {
-        return postRepository.findTop4ByOrderByRegisterDateDesc().stream()
-                .map(PostResponse::new)
-                .collect(Collectors.toList());
-    }
 }

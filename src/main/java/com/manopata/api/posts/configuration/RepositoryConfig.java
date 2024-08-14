@@ -16,6 +16,6 @@ public class RepositoryConfig {
     }
 
     @Bean
-    public PostRepository postRepository() {
+    public JpaPostRepository postRepository() {
         return new PostDbo(jpaPostRepository);
     }}
