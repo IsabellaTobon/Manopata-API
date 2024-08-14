@@ -1,12 +1,12 @@
 package com.manopata.api.posts.services;
 
-
 import com.manopata.api.posts.dto.PostRequest;
 import com.manopata.api.posts.dto.PostResponse;
 import com.manopata.api.posts.exceptions.PostNotFoundException;
 import com.manopata.api.posts.interfaces.models.Post;
-import com.manopata.api.posts.interfaces.repositories.PostRepository;
+import com.manopata.api.posts.interfaces.repositories.JpaPostRepository;
 import lombok.SneakyThrows;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -18,13 +18,15 @@ import java.util.stream.Collectors;
 @Service
 public class PostService {
 
-    private PostRepository postRepository;
+    private final JpaPostRepository postRepository;
 
-    public PostService (PostRepository postRepository) {this.postRepository = postRepository;}
+    @Autowired
+    public PostService(JpaPostRepository postRepository) {
+        this.postRepository = postRepository;
+    }
 
     @SneakyThrows
-    public PostResponse create(PostRequest request)
-    {
+    public PostResponse create(PostRequest request) {
         String id = UUID.randomUUID().toString();
         Post post = new Post();
         post.setId(id);
@@ -41,12 +43,10 @@ public class PostService {
         post.setProvince(request.getProvince());
         post.setAvailable(request.getAvailable());
         post.setLikes(request.getLikes());
-        Post savedPost = postRepository.save(post);
-        return new PostResponse(savedPost);
+        return new PostResponse(postRepository.save(post));
     }
 
-    @SneakyThrows
-    public PostResponse edit (String id, PostRequest request) {
+    public PostResponse edit(String id, PostRequest request) {
         Optional<Post> optionalPost = postRepository.findById(id);
         if (optionalPost.isEmpty()) {
             throw new PostNotFoundException("Post not found with id " + id);
@@ -64,23 +64,24 @@ public class PostService {
         post.setProvince(request.getProvince());
         post.setAvailable(request.getAvailable());
         post.setLikes(request.getLikes());
-        Post updatedPost = postRepository.save(post);
-        return new PostResponse(updatedPost);
+        return new PostResponse(postRepository.save(post));
     }
 
-    @SneakyThrows
-    public void delete(String id)
-    {
-        Optional<Post> optionalUser = this.postRepository.findById(id);
-        if (optionalUser.isEmpty()) {
-            throw new PostNotFoundException("Post not found with id " + id);
-        }
-//        postRepository.delete(optionalPost.get());
-        this.postRepository.delete(id);
+    public void delete(String id) {
+        postRepository.deleteById(id);
+    }
+
+    public PostResponse findById(String id) {
+        return postRepository.findById(id)
+                .map(PostResponse::new)
+                .orElseThrow(() -> new PostNotFoundException("Post not found with id " + id));
     }
 
     public List<PostResponse> getAllPosts() {
-        List<Post> posts = postRepository.findAll();
-        return posts.stream().map(PostResponse::new).collect(Collectors.toList());
+        return postRepository.findAll().stream().map(PostResponse::new).collect(Collectors.toList());
+    }
+
+    public List<PostResponse> getLatestPosts() {
+        return postRepository.findTop4ByOrderByRegisterDateDesc().stream().map(PostResponse::new).collect(Collectors.toList());
     }
 }

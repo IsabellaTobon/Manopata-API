@@ -2,7 +2,6 @@ package com.manopata.api.posts.interfaces.dbo;
 
 import com.manopata.api.posts.interfaces.models.Post;
 import com.manopata.api.posts.interfaces.repositories.JpaPostRepository;
-import com.manopata.api.posts.interfaces.repositories.PostRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
